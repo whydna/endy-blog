@@ -5,9 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncatewords: 50 }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncatewords: 30 }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="twitter:description" content="{{ page.excerpt | default: site.description | strip_html | truncatewords: 30 }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▸</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <style>
     :root {
       --bg: #0c0c10;
@@ -276,6 +287,62 @@
       border: none;
       padding: 0;
       color: var(--text);
+      font-size: 0.88rem;
+    }
+
+    /* Override highlight.js theme to match our aesthetic */
+    .hljs {
+      background: var(--surface) !important;
+      color: var(--text) !important;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-literal,
+    .hljs-section,
+    .hljs-link {
+      color: #c084fc !important;
+    }
+
+    .hljs-string,
+    .hljs-attr,
+    .hljs-template-variable {
+      color: #34d399 !important;
+    }
+
+    .hljs-variable,
+    .hljs-params,
+    .hljs-regexp {
+      color: var(--text) !important;
+    }
+
+    .hljs-built_in,
+    .hljs-name,
+    .hljs-type {
+      color: var(--accent) !important;
+    }
+
+    .hljs-number {
+      color: #f472b6 !important;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+      color: var(--text-muted) !important;
+      font-style: italic;
+    }
+
+    .hljs-title,
+    .hljs-title.function_ {
+      color: #60a5fa !important;
+    }
+
+    .hljs-meta {
+      color: var(--text-secondary) !important;
+    }
+
+    .hljs-attribute {
+      color: #fbbf24 !important;
     }
 
     .post-content hr {
@@ -512,5 +579,6 @@
       </div>
     </div>
   </footer>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
